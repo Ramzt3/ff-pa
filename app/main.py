@@ -1,5 +1,5 @@
 from fastapi import Depends, FastAPI
-from .routers import item
+from .routers import posts
 import time
 from sqlalchemy.orm import Session
 from . import models
@@ -10,7 +10,7 @@ models.Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 
-app.include_router(item.router)
+app.include_router(posts.router)
 
 import psycopg2
 from psycopg2.extras import RealDictCursor
@@ -31,4 +31,6 @@ def read_root():
 
 @app.get("/sql")
 def test_post(db: Session = Depends(get_db)):
-    return {"good one lol"}
+    
+    posts = db.query(models.Post).all()
+    return {"data": posts}
