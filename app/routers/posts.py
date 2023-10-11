@@ -3,7 +3,6 @@ from fastapi import APIRouter, status, Response, HTTPException, Depends
 from .. import schemas, models
 from ..database import get_db
 from sqlalchemy.orm import Session
-import random
 
 router = APIRouter(
     prefix="/posts",

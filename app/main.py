@@ -1,10 +1,8 @@
-from fastapi import Depends, FastAPI
+from fastapi import FastAPI
 from .routers import posts
 import time
-from sqlalchemy.orm import Session
 from . import models
-from .database import engine, get_db
-
+from .database import engine
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
@@ -30,7 +28,6 @@ def read_root():
     return {"data": "Hello"}
 
 @app.get("/sql")
-def test_post(db: Session = Depends(get_db)):
-    
-    posts = db.query(models.Post).all()
-    return {"data": posts}
+def test_post():
+
+    return {"data": "nice"}
