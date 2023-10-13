@@ -9,7 +9,7 @@ router = APIRouter(
     tags=["Posts"]
 )
 
-@router.get("", status_code=status.HTTP_200_OK, response_model=List[schemas.Post])
+@router.get("/", status_code=status.HTTP_200_OK, response_model=List[schemas.Post])
 def get_posts(db: Session = Depends(get_db)):
     posts = db.query(models.Post).all()
     if not posts:
@@ -17,7 +17,7 @@ def get_posts(db: Session = Depends(get_db)):
     return posts
 
 
-@router.post("", status_code=status.HTTP_201_CREATED, response_model=schemas.Post)
+@router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.Post)
 def create_post(data: schemas.PostCreate, db: Session = Depends(get_db)):
     # title=data.title, content=data.content, published=data.published
     new_post = models.Post(**data.model_dump())
