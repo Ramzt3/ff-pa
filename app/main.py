@@ -26,8 +26,3 @@ while True:
 @app.get("/")
 def read_root():
     return {"data": "Hello"}
-
-@app.get("/sql")
-def test_post():
-
-    return {"data": "nice"}
