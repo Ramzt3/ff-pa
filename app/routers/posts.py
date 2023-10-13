@@ -49,6 +49,7 @@ def delete_post(id: int, db: Session = Depends(get_db)):
 
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
+
 @router.put("/{id}", response_model=schemas.Post)
 def update_post(id: int, data: schemas.PostCreate, db: Session = Depends(get_db)):
     post_query = db.query(models.Post).filter(models.Post.id == id)
